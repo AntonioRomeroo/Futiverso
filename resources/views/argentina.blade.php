@@ -1,0 +1,10 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="wrap">
+        <div class="content">
+            <h1>Argentina</h1>
+            <p>Camisetas de la Selección Argentina próximamente...</p>
+        </div>
+    </div>
+@endsection

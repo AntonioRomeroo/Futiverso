@@ -11,105 +11,105 @@ Route::get('/laliga', function () {
 })->name('laliga');
 
 Route::get('/laligahypermotion', function () {
-  return 'La Liga Hypermotion';
+  return view('laligahypermotion');
 })->name('laligahypermotion');
 
 Route::get('/seriea', function () {
-  return 'Serie A';
+  return view('seriea');
 })->name('seriea');
 
 Route::get('/premierleague', function () {
-  return 'Premier League';
+  return view('premierleague');
 })->name('premierleague');
 
 Route::get('/league1', function () {
-  return 'League 1';
+  return view('league1');
 })->name('league1');
 
 Route::get('/bundesliga', function () {
-  return 'Bundesliga';
+  return view('bundesliga');
 })->name('bundesliga');
 
 Route::get('/ligaargentina', function () {
-  return 'Liga Argentina';
+  return view('ligaargentina');
 })->name('ligaargentina');
 
 Route::get('/mas1', function () {
-  return 'Más...';
+  return view('mas1');
 })->name('mas1');
 
 Route::get('/espana', function () {
-  return 'España';
+  return view('espana');
 })->name('espana');
 
 Route::get('/argentina', function () {
-  return 'Argentina';
+  return view('argentina');
 })->name('argentina');
 
 Route::get('/brasil', function () {
-  return 'Brasil';
+  return view('brasil');
 })->name('brasil');
 
 Route::get('/francia', function () {
-  return 'Francia';
+  return view('francia');
 })->name('francia');
 
 Route::get('/alemania', function () {
-  return 'Alemania';
+  return view('alemania');
 })->name('alemania');
 
 Route::get('/italia', function () {
-  return 'Italia';
+  return view('italia');
 })->name('italia');
 
 Route::get('/inglaterra', function () {
-  return 'Inglaterra';
+  return view('inglaterra');
 })->name('inglaterra');
 
 Route::get('/portugal', function () {
-  return 'Portugal';
+  return view('portugal');
 })->name('portugal');
 
 Route::get('/mas2', function () {
-  return 'Más...';
+  return view('mas2');
 })->name('mas2');
 
 Route::get('/anos90', function () {
-  return 'Años 90';
+  return view('anos90');
 })->name('anos90');
 
 Route::get('/anos2000', function () {
-  return 'Años 2000';
+  return view('anos2000');
 })->name('anos2000');
 
 Route::get('/clasicas', function () {
-  return 'Clásicas';
+  return view('clasicas');
 })->name('clasicas');
 
 Route::get('/tallanino', function () {
-  return 'Talla Niño';
+  return view('tallanino');
 })->name('tallanino');
 
 Route::get('/cortos', function () {
-  return 'Pantalones cortos';
+  return view('cortos');
 })->name('cortos');
 
 Route::get('/largos', function () {
-  return 'Pantalones largos';
+  return view('largos');
 })->name('largos');
 
 Route::get('/botas', function () {
-  return 'Botas';
+  return view('botas');
 })->name('botas');
 
 Route::get('/clubes', function () {
-  return 'Bufandas clubes';
+  return view('clubes');
 })->name('clubes');
 
 Route::get('/selecciones', function () {
-  return 'Bufandas selecciones';
+  return view('selecciones');
 })->name('selecciones');
 
 Route::get('/retro', function () {
-  return 'Bufandas retro';
+  return view('retro');
 })->name('retro');
