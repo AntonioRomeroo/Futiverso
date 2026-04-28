@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lexend:wght@100..900&display=swap"
         rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('CSS/estilos_prueba.css') }}">
     @stack('styles')
 </head>
