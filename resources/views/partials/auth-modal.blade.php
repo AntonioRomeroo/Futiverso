@@ -1,21 +1,3 @@
-<!-- HEADER -->
-<header class="top">
-    <div class="top-grid">
-        <div class="logo">
-            <a href="{{ route('welcome') }}">
-                <img src="{{ asset('imagenes/prueba_con_este.png') }}" alt="Futiverso logo">
-            </a>
-        </div>
-
-        <div class="search">
-            <input type="search" placeholder="(EJ: 'Camiseta España')">
-        </div>
-
-        <!-- BOTÓN LOGIN (AHORA DENTRO DEL HEADER) -->
-        <button class="btn-login" id="openAuth" type="button">Iniciar sesión</button>
-    </div>
-</header>
-
 <!-- MODAL AUTH -->
 <div class="auth-modal" id="authModal" aria-hidden="true">
     <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
