@@ -204,6 +204,12 @@
             </div>
         @endif
 
+        @if($errors->any())
+            <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-bottom: 25px; border-left: 5px solid #f5c6cb; font-size: 14px;">
+                ❌ {{ $errors->first() }}
+            </div>
+        @endif
+
         <form action="{{ route('perfil.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
