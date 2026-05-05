@@ -8,18 +8,22 @@ use App\Models\Category;
 class JerseyController extends Controller
 {
     /**
-     * Muestra la categoría solicitada desde la base de datos.
+     * Esta funcion recibe el nombre de la categoria que el usuario ha pinchado (el 'slug').
+     * Por ejemplo, si entra a '/laliga', el $slug sera 'laliga'.
      */
     public function show($slug)
     {
-        // Buscamos la categoría por su slug en la base de datos
+        // 1. Vamos a la base de datos y buscamos la primera categoria que coincida con ese slug.
         $categoria = Category::where('slug', $slug)->first();
 
-        // Si no existe, lanzamos un 404
+        // 2. Si el usuario se inventa una URL (ej: /inventado) y no existe en la base de datos...
         if (!$categoria) {
+            // Le sacamos la clasica pagina de error 404 (Pagina no encontrada).
             abort(404);
         }
 
+        // 3. Si la categoria si existe, mandamos al usuario a la vista visual 'categoria.blade.php'
+        // y le pasamos los datos que hemos sacado de la base de datos (titulo y descripcion).
         return view('categoria', [
             'titulo' => $categoria->nombre,
             'descripcion' => $categoria->descripcion

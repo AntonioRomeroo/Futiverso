@@ -9,8 +9,15 @@
         </div>
 
         <!-- LOGIN -->
-        <form class="auth-form active" id="loginForm">
+        <form class="auth-form active" id="loginForm" method="POST" action="{{ route('login.post') }}">
+            @csrf
             <h2 id="authTitle">Bienvenido a Futiverso🔥</h2>
+
+            @if ($errors->any())
+                <div style="color: red; margin-bottom: 15px; font-size: 14px;">
+                    {{ $errors->first('email') }}
+                </div>
+            @endif
 
             <label>Email</label>
             <input type="email" name="email" placeholder="fulanito@correo.com" required>
@@ -45,3 +52,13 @@
         </form>
     </div>
 </div>
+
+@if ($errors->any())
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Automatically open the modal if there are login errors
+        document.getElementById("authModal").classList.add("show");
+        document.getElementById("authModal").setAttribute("aria-hidden", "false");
+    });
+</script>
+@endif

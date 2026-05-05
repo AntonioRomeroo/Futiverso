@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
             ['email' => 'admin@futiverso.com'],
             [
                 'name' => 'Administrador',
-                'password' => Hash::make('admin123'),
+                'password' => Hash::make('Futiverso2026!'),
                 'is_admin' => true,
             ]   
         );
