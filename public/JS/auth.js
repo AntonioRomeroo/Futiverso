@@ -46,8 +46,8 @@ openAuth.addEventListener("click", showModal);
 closeAuth.addEventListener("click", hideModal);
 
 // Si el usuario hace click fuera de la tarjeta (fondo oscuro)
-// cerramos el modal
-authModal.addEventListener("click", (e) => {
+// cerramos el modal. Usamos 'mousedown' para que si selecciona texto y suelta fuera, no se cierre por accidente.
+authModal.addEventListener("mousedown", (e) => {
   if (e.target === authModal) {
     hideModal();
   }

@@ -10,6 +10,7 @@ use App\Http\Controllers\JerseyController;
 */
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdminController;
 
 // --------------------------------------------------------------------------
@@ -36,6 +37,9 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login')->
 
 // Esta es la ruta oculta que procesa los datos cuando le das al boton de "Entrar".
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+
+// Esta es la ruta oculta que procesa los datos de registro cuando creas una cuenta.
+Route::post('/registro', [RegisterController::class, 'register'])->name('register.post');
 
 // Esta ruta destruye la sesion y te devuelve a la portada.
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
