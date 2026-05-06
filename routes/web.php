@@ -12,6 +12,9 @@ use App\Http\Controllers\JerseyController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminProductController;
+
+use App\Http\Controllers\AdminCategoryController;
 
 // --------------------------------------------------------------------------
 // RUTAS PRINCIPALES (Páginas públicas)
@@ -53,6 +56,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'is_admin'])->group(function () {
     // Te lleva a la pantalla principal del panel de control donde ves los graficos y botones.
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    
+    // Rutas para gestionar los productos (CRUD completo)
+    Route::resource('/admin/products', AdminProductController::class)->names('admin.products');
+    
+    // Rutas para gestionar las categorías (CRUD completo)
+    Route::resource('/admin/categories', AdminCategoryController::class)->names('admin.categories');
 });
 
 
@@ -70,8 +79,11 @@ Route::middleware(['auth'])->group(function () {
 
 
 // --------------------------------------------------------------------------
-// RUTA DINAMICA DE CATEGORIAS (El motor de la tienda)
+// RUTAS DINAMICAS DE TIENDA (Públicas)
 // --------------------------------------------------------------------------
+
+// Ruta para ver los detalles de un producto específico
+Route::get('/producto/{id}', [\App\Http\Controllers\PublicProductController::class, 'show'])->name('producto.show');
 
 // MUY IMPORTANTE: Esta ruta siempre va al final. 
 // Captura cualquier palabra que pongas detras de la barra (ejemplo: /laliga, /retro) 

@@ -23,7 +23,7 @@
                 <i class="fa-solid fa-layer-group" style="font-size: 40px; color: #F7B633; margin-bottom: 15px;"></i>
                 <h2 style="color: #070D59; font-size: 36px; margin: 0;">{{ $totalCategorias }}</h2>
                 <p style="color: #777; margin-top: 5px;">Categorías / Ligas</p>
-                <button style="margin-top: 15px; background: #070D59; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Gestionar</button>
+                <a href="{{ route('admin.categories.index') }}" style="display: inline-block; margin-top: 15px; background: #070D59; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; text-decoration: none;">Gestionar</a>
             </div>
 
             {{-- Tarjeta Productos --}}
@@ -31,7 +31,7 @@
                 <i class="fa-solid fa-shirt" style="font-size: 40px; color: #F7B633; margin-bottom: 15px;"></i>
                 <h2 style="color: #070D59; font-size: 36px; margin: 0;">{{ $totalProductos }}</h2>
                 <p style="color: #777; margin-top: 5px;">Productos</p>
-                <button style="margin-top: 15px; background: #070D59; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Gestionar</button>
+                <a href="{{ route('admin.products.index') }}" style="display: inline-block; margin-top: 15px; background: #070D59; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; text-decoration: none;">Gestionar</a>
             </div>
 
             {{-- Tarjeta Usuarios --}}

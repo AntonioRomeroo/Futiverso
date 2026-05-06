@@ -604,7 +604,13 @@ footer {
 }
 
 .footer {
-  /* Estilos heredados de la etiqueta footer */
+  background: #070D59 !important;
+  height: auto !important;
+  min-height: 300px;
+  padding: 60px 0 20px;
+  color: #fff;
+  margin-top: 80px;
+  border-top: 4px solid #F7B633;
 }
 
 .footer__grid {
@@ -665,7 +671,7 @@ footer {
   gap: 16px;
   margin-top: 20px;
 }
- 
+
 .footer__social a {
   font-size: 20px;
   transition: transform .2s ease, color .2s ease;
@@ -677,7 +683,7 @@ footer {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
 }
- 
+
 .footer__social a:hover {
   transform: translateY(-3px);
   background: var(--amarillo);
@@ -706,7 +712,7 @@ footer {
   flex-wrap: wrap;
   font-size: 24px;
 }
- 
+
 .footer__trust span {
   font-size: 14px;
 }

@@ -21,8 +21,8 @@ class IsAdmin
         // Se pone delante de la puerta de la pagina 'admin' y hace dos preguntas:
         
         // Pregunta 1: ¿Tienes la sesion iniciada? (Auth::check)
-        // Pregunta 2: En tu base de datos, ¿tienes la etiqueta de jefe? (Auth::user()->is_admin)
-        if (Auth::check() && Auth::user()->is_admin) {
+        // Pregunta 2: En tu base de datos, ¿tienes la etiqueta de jefe? (Auth::user()->isAdmin())
+        if (Auth::check() && Auth::user()->isAdmin()) {
             
             // Si cumples las dos condiciones, el portero abre la puerta y te deja pasar.
             return $next($request);

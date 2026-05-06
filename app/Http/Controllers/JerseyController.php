@@ -14,7 +14,8 @@ class JerseyController extends Controller
     public function show($slug)
     {
         // 1. Vamos a la base de datos y buscamos la primera categoria que coincida con ese slug.
-        $categoria = Category::where('slug', $slug)->first();
+        // Tambien cargamos sus productos para pasarlos a la vista.
+        $categoria = Category::with('products')->where('slug', $slug)->first();
 
         // 2. Si el usuario se inventa una URL (ej: /inventado) y no existe en la base de datos...
         if (!$categoria) {
@@ -23,10 +24,11 @@ class JerseyController extends Controller
         }
 
         // 3. Si la categoria si existe, mandamos al usuario a la vista visual 'categoria.blade.php'
-        // y le pasamos los datos que hemos sacado de la base de datos (titulo y descripcion).
+        // y le pasamos los datos que hemos sacado de la base de datos (titulo, descripcion y PRODUCTOS).
         return view('categoria', [
             'titulo' => $categoria->nombre,
-            'descripcion' => $categoria->descripcion
+            'descripcion' => $categoria->descripcion,
+            'productos' => $categoria->products
         ]);
     }
 }
