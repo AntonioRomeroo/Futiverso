@@ -3,17 +3,18 @@
 @section('content')
     <div class="wrap">
         <div class="content">
-            <h1 style="text-transform: uppercase; color: #070D59; border-bottom: 3px solid #F7B633; display: inline-block; padding-bottom: 10px; margin-bottom: 20px;">
-                {{ $titulo }}
-            </h1>
-            
-            <p style="font-size: 18px; color: #555; line-height: 1.6; max-width: 800px;">
-                {{ $descripcion }}
-            </p>
+            <div style="margin-bottom: 40px;">
+                <h1 style="text-transform: uppercase; color: #070D59; border-bottom: 3px solid #F7B633; display: inline-block; padding-bottom: 10px; margin-bottom: 15px;">
+                    {{ $title }}
+                </h1>
+                <p style="font-size: 16px; color: #777;">
+                    Descubre nuestra selección exclusiva de {{ strtolower($title) }}.
+                </p>
+            </div>
 
-            @if(isset($productos) && count($productos) > 0)
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; margin-top: 40px;">
-                    @foreach($productos as $producto)
+            @if($products->count() > 0)
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px;">
+                    @foreach($products as $producto)
                         <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
                             <a href="{{ route('producto.show', $producto->id) }}" style="text-decoration: none; display: block;">
                                 <div style="height: 280px; background: #f9f9f9; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
@@ -31,8 +32,11 @@
                                             <span>-{{ $descuento }}%</span>
                                         </div>
                                     @endif
+                                    
                                     @if($producto->imagen_url)
                                         <img src="{{ str_starts_with($producto->imagen_url, 'http') ? $producto->imagen_url : asset('storage/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
+                                    @elseif($producto->imagen)
+                                        <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
                                     @else
                                         <i class="fa-solid fa-shirt" style="font-size: 100px; color: #eee;"></i>
                                     @endif
@@ -62,7 +66,7 @@
                                             <i class="fa-solid fa-fire-flame-curved"></i> ¡Solo quedan {{ $producto->stock }} unidades!
                                         </p>
                                     @endif
-                                    
+
                                     <a href="{{ route('producto.show', $producto->id) }}" style="width: 100%; background: #070D59; color: white; border: none; padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.background='#F7B633'; this.style.color='#070D59'" onmouseout="this.style.background='#070D59'; this.style.color='white'">
                                         <i class="fa-solid fa-eye"></i> COMPRAR
                                     </a>
@@ -71,11 +75,18 @@
                         </div>
                     @endforeach
                 </div>
+
+                <div style="margin-top: 40px;">
+                    {{ $products->links() }}
+                </div>
             @else
-                <div style="margin-top: 50px; padding: 40px; background: #fff; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                    <i class="fa-solid fa-shirt" style="font-size: 50px; color: #ededed; margin-bottom: 20px;"></i>
-                    <h3 style="color: #999;">Aún no hay productos en {{ $titulo }}</h3>
-                    <p style="color: #bbb;">Estamos actualizando el stock para esta temporada. ¡Vuelve pronto!</p>
+                <div style="margin-top: 50px; padding: 60px; background: #fff; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                    <i class="fa-solid fa-box-open" style="font-size: 60px; color: #ededed; margin-bottom: 20px;"></i>
+                    <h2 style="color: #070D59;">Próximamente...</h2>
+                    <p style="color: #777; font-size: 18px;">Actualmente no hay productos en esta sección, ¡vuelve pronto!</p>
+                    <a href="{{ route('inicio') }}" style="display: inline-block; margin-top: 25px; background: #070D59; color: white; text-decoration: none; padding: 12px 30px; border-radius: 30px; font-weight: bold;">
+                        Volver a la tienda
+                    </a>
                 </div>
             @endif
         </div>

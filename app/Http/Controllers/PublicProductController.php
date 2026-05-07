@@ -15,4 +15,24 @@ class PublicProductController extends Controller
         
         return view('producto', compact('producto'));
     }
+
+    /**
+     * Muestra todos los productos marcados como Novedad (is_featured).
+     */
+    public function novedades()
+    {
+        $products = Product::where('is_featured', true)->latest()->paginate(12);
+        $title = "Novedades";
+        return view('lista_especial', compact('products', 'title'));
+    }
+
+    /**
+     * Muestra todos los productos que tienen un precio de oferta.
+     */
+    public function ofertas()
+    {
+        $products = Product::whereNotNull('precio_oferta')->latest()->paginate(12);
+        $title = "Ofertas Especiales";
+        return view('lista_especial', compact('products', 'title'));
+    }
 }

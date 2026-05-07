@@ -26,12 +26,20 @@ Route::get('/', function () {
 })->name('inicio');
 
 // Pagina para ver las novedades de la tienda.
-Route::get('/novedades', function () {
-    return view('novedades');
-})->name('novedades');
+Route::get('/novedades', [App\Http\Controllers\PublicProductController::class, 'novedades'])->name('novedades');
+
+// Pagina para ver las ofertas de la tienda.
+Route::get('/ofertas', [App\Http\Controllers\PublicProductController::class, 'ofertas'])->name('ofertas');
 
 // Ruta para el buscador de productos
 Route::get('/buscar', \App\Http\Controllers\SearchController::class)->name('buscar');
+
+// Rutas para el Carrito de Compra
+Route::get('/carrito', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+Route::post('/carrito/añadir', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+Route::patch('/carrito/incrementar/{key}', [\App\Http\Controllers\CartController::class, 'increment'])->name('cart.increment');
+Route::patch('/carrito/decrementar/{key}', [\App\Http\Controllers\CartController::class, 'decrement'])->name('cart.decrement');
+Route::delete('/carrito/eliminar/{key}', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
 
 
 // --------------------------------------------------------------------------
@@ -62,6 +70,8 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     
     // Rutas para gestionar los productos (CRUD completo)
     Route::resource('/admin/products', AdminProductController::class)->names('admin.products');
+    Route::get('/admin/products/{product}/offer', [AdminProductController::class, 'editOffer'])->name('admin.products.offer');
+    Route::patch('/admin/products/{product}/offer', [AdminProductController::class, 'updateOffer'])->name('admin.products.updateOffer');
     
     // Rutas para gestionar las categorías (CRUD completo)
     Route::resource('/admin/categories', AdminCategoryController::class)->names('admin.categories');

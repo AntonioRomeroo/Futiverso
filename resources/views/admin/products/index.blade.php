@@ -48,14 +48,24 @@
                             </td>
                             <td style="padding: 15px; font-weight: bold; color: #070D59;">{{ $product->nombre }}</td>
                             <td style="padding: 15px; color: #777;">{{ $product->category ? $product->category->nombre : 'Sin categoría' }}</td>
-                            <td style="padding: 15px; color: #2ecc71; font-weight: bold;">{{ number_format($product->precio, 2) }} €</td>
+                             <td style="padding: 15px; font-weight: bold;">
+                                 @if($product->precio_oferta)
+                                     <span style="color: #e74c3c; text-decoration: line-through; font-size: 12px;">{{ number_format($product->precio, 2) }} €</span><br>
+                                     <span style="color: #2ecc71;">{{ number_format($product->precio_oferta, 2) }} €</span>
+                                 @else
+                                     <span style="color: #2ecc71;">{{ number_format($product->precio, 2) }} €</span>
+                                 @endif
+                             </td>
                             <td style="padding: 15px;">
                                 <span style="background: {{ $product->stock > 0 ? '#e8f8f5' : '#fdedec' }}; color: {{ $product->stock > 0 ? '#2ecc71' : '#e74c3c' }}; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
                                     {{ $product->stock }} unids.
                                 </span>
                             </td>
                             <td style="padding: 15px; text-align: center;">
-                                <a href="{{ route('admin.products.edit', $product->id) }}" style="color: #F7B633; margin-right: 10px; text-decoration: none;" title="Editar">
+                                <a href="{{ route('admin.products.offer', $product->id) }}" style="color: #2ecc71; margin-right: 15px; text-decoration: none;" title="Gestionar Oferta">
+                                    <i class="fa-solid fa-tag"></i>
+                                </a>
+                                <a href="{{ route('admin.products.edit', $product->id) }}" style="color: #F7B633; margin-right: 15px; text-decoration: none;" title="Editar">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
                                 <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro de eliminar este producto?');">

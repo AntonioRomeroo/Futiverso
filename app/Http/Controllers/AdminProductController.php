@@ -29,6 +29,7 @@ class AdminProductController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
+            'precio_oferta' => 'nullable|numeric|min:0|lt:precio',
             'stock' => 'required|integer|min:0',
             'imagen_url' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
             'is_featured' => 'boolean'
@@ -60,6 +61,7 @@ class AdminProductController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
+            'precio_oferta' => 'nullable|numeric|min:0|lt:precio',
             'stock' => 'required|integer|min:0',
             'imagen_url' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'is_featured' => 'boolean'
@@ -91,5 +93,29 @@ class AdminProductController extends Controller
         $product->delete();
 
         return redirect()->route('admin.products.index')->with('success', 'Producto eliminado correctamente.');
+    }
+
+    /**
+     * Muestra el pequeño formulario para poner una oferta.
+     */
+    public function editOffer(Product $product)
+    {
+        return view('admin.products.offer', compact('product'));
+    }
+
+    /**
+     * Actualiza solo el precio de oferta.
+     */
+    public function updateOffer(Request $request, Product $product)
+    {
+        $request->validate([
+            'precio_oferta' => 'nullable|numeric|min:0|lt:precio'
+        ]);
+
+        $product->update([
+            'precio_oferta' => $request->precio_oferta
+        ]);
+
+        return redirect()->route('admin.products.index')->with('success', 'Oferta actualizada correctamente.');
     }
 }

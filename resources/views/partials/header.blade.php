@@ -15,9 +15,20 @@
             </form>
         </div>
 
-        @guest
-            <button class="btn-login" id="openAuth" type="button">Iniciar sesión</button>
-        @endguest
+        <div style="display: flex; align-items: center; gap: 20px; justify-self: end;">
+            {{-- Icono del Carrito --}}
+            <a href="{{ route('cart.index') }}" style="position: relative; color: #070D59; text-decoration: none; font-size: 24px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fa-solid fa-cart-shopping"></i>
+                @if(session('cart') && count(session('cart')) > 0)
+                    <span style="position: absolute; top: -10px; right: -12px; background: #F7B633; color: #070D59; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; border: 2px solid white;">
+                        {{ count(session('cart')) }}
+                    </span>
+                @endif
+            </a>
+
+            @guest
+                <button class="btn-login" id="openAuth" type="button">Iniciar sesión</button>
+            @endguest
 
         @auth
             <div class="user-menu-container" style="position: relative; display: inline-block; justify-self: end; margin-right: 25px;">

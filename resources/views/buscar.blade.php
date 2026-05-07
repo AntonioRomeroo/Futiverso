@@ -17,17 +17,28 @@
                     @foreach($products as $producto)
                         <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
                             <a href="{{ route('producto.show', $producto->id) }}" style="text-decoration: none; display: block;">
-                                <div style="height: 250px; background: #f9f9f9; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                                <div style="height: 280px; background: #f9f9f9; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                                    {{-- Etiqueta de Novedad (Izquierda) --}}
                                     @if($producto->is_featured)
-                                        <span style="position: absolute; top: 10px; right: 10px; background: #F7B633; color: #070D59; font-size: 12px; font-weight: bold; padding: 5px 10px; border-radius: 20px; z-index: 2;">NOVEDAD</span>
+                                        <span style="position: absolute; top: 10px; left: 10px; background: #F7B633; color: #070D59; font-size: 11px; font-weight: bold; padding: 4px 10px; border-radius: 20px; z-index: 2;">NOVEDAD</span>
+                                    @endif
+
+                                    {{-- Etiqueta de Descuento (Derecha) --}}
+                                    @if($producto->precio_oferta)
+                                        @php
+                                            $descuento = round((1 - ($producto->precio_oferta / $producto->precio)) * 100);
+                                        @endphp
+                                        <div style="position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3); z-index: 2; flex-direction: column; line-height: 1;">
+                                            <span>-{{ $descuento }}%</span>
+                                        </div>
                                     @endif
                                     
                                     @if($producto->imagen_url)
-                                        <img src="{{ str_starts_with($producto->imagen_url, 'http') ? $producto->imagen_url : asset('storage/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">
+                                        <img src="{{ str_starts_with($producto->imagen_url, 'http') ? $producto->imagen_url : asset('storage/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
                                     @elseif($producto->imagen)
-                                        <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">
+                                        <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
                                     @else
-                                        <i class="fa-solid fa-shirt" style="font-size: 80px; color: #eee;"></i>
+                                        <i class="fa-solid fa-shirt" style="font-size: 100px; color: #eee;"></i>
                                     @endif
                                 </div>
                             </a>
@@ -35,11 +46,31 @@
                                 <a href="{{ route('producto.show', $producto->id) }}" style="text-decoration: none;">
                                     <h3 style="color: #070D59; margin-top: 0; margin-bottom: 10px; font-size: 18px; transition: color 0.2s;" onmouseover="this.style.color='#F7B633'" onmouseout="this.style.color='#070D59'">{{ $producto->nombre }}</h3>
                                 </a>
-                                <p style="color: #F7B633; font-weight: bold; font-size: 20px; margin-bottom: 15px;">{{ number_format($producto->precio, 2) }} €</p>
                                 
-                                <button style="width: 100%; background: #070D59; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                    <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
-                                </button>
+                                @if($producto->precio_oferta)
+                                    <p style="margin-bottom: 15px;">
+                                        <span style="color: #e74c3c; text-decoration: line-through; font-size: 16px; margin-right: 10px;">{{ number_format($producto->precio, 2) }} €</span>
+                                        <span style="color: #e74c3c; font-weight: bold; font-size: 22px;">{{ number_format($producto->precio_oferta, 2) }} €</span>
+                                    </p>
+                                @else
+                                    <p style="color: #F7B633; font-weight: bold; font-size: 20px; margin-bottom: 15px;">{{ number_format($producto->precio, 2) }} €</p>
+                                @endif
+                                
+                                @if($producto->stock == 0)
+                                    <div style="width: 100%; background: #eee; color: #999; border: none; padding: 12px; border-radius: 5px; font-weight: bold; text-align: center; margin-top: 10px;">
+                                        Agotado
+                                    </div>
+                                @else
+                                    @if($producto->stock < 15)
+                                        <p style="color: #e67e22; font-size: 13px; font-weight: bold; margin-bottom: 10px;">
+                                            <i class="fa-solid fa-fire-flame-curved"></i> ¡Solo quedan {{ $producto->stock }} unidades!
+                                        </p>
+                                    @endif
+
+                                    <a href="{{ route('producto.show', $producto->id) }}" style="width: 100%; background: #070D59; color: white; border: none; padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.background='#F7B633'; this.style.color='#070D59'" onmouseout="this.style.background='#070D59'; this.style.color='white'">
+                                        <i class="fa-solid fa-eye"></i> COMPRAR
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @endforeach

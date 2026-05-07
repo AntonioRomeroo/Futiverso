@@ -7,7 +7,7 @@
             <section class="car-grid">
 
                 <article class="sq" data-sqcarousel data-interval="2800">
-                    <a class="sq-cardlink" href="#">
+                    <a class="sq-cardlink" href="{{ route('novedades') }}">
                         <div class="sq-viewport">
                             <div class="sq-track">
                                 <img src="{{ asset('Imagenes/Camisetas Carrusel/camiseta_españa_mundial_2026.png') }}" alt="España Mundial 2026">
@@ -20,7 +20,7 @@
                 </article>
 
                 <article class="sq" data-sqcarousel data-interval="3200">
-                    <a class="sq-cardlink" href="#">
+                    <a class="sq-cardlink" href="{{ route('novedades') }}">
                         <div class="sq-viewport">
                             <div class="sq-track">
                                 <img src="{{ asset('Imagenes/Camisetas Carrusel/camiseta_antequera.png') }}" alt="Camiseta Antequera">
@@ -33,7 +33,7 @@
                 </article>
 
                 <article class="sq" data-sqcarousel data-interval="3600">
-                    <a class="sq-cardlink" href="#">
+                    <a class="sq-cardlink" href="{{ route('ofertas') }}">
                         <div class="sq-viewport">
                             <div class="sq-track">
                                 <img src="{{ asset('Imagenes/Camisetas Carrusel/camiseta_barça_25-26.png') }}" alt="Camiseta Barça 25-26">
