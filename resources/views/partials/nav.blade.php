@@ -3,64 +3,82 @@
         <div></div>
         <div class="menu">
 
+            {{-- CAMISETAS 25/26 (Ligas) --}}
+            @php $ligas = $allCategories->where('grupo', 'Ligas'); @endphp
+            @if($ligas->count() > 0)
             <details class="dd">
                 <summary>CAMISETAS 25/26 <span class="chev">▾</span></summary>
                 <div class="dd-panel">
-                    <a href="{{ route('categoria', 'laliga') }}">La Liga</a>
-                    <a href="{{ route('categoria', 'laligahypermotion') }}">La Liga Hypermotion</a>
-                    <a href="{{ route('categoria', 'seriea') }}">Serie A</a>
-                    <a href="{{ route('categoria', 'premierleague') }}">Premier League</a>
-                    <a href="{{ route('categoria', 'league1') }}">League 1</a>
-                    <a href="{{ route('categoria', 'bundesliga') }}">Bundesliga</a>
-                    <a href="{{ route('categoria', 'ligaargentina') }}">Liga Argentina</a>
-                    <a href="{{ route('categoria', 'mas1') }}">Más...</a>
+                    @foreach($ligas as $cat)
+                        <a href="{{ route('categoria', $cat->slug) }}">{{ $cat->nombre }}</a>
+                    @endforeach
                 </div>
             </details>
+            @endif
 
+            {{-- SELECCIONES --}}
+            @php $selecciones = $allCategories->where('grupo', 'Selecciones'); @endphp
+            @if($selecciones->count() > 0)
             <details class="dd">
                 <summary>SELECCIONES <span class="chev">▾</span></summary>
                 <div class="dd-panel">
-                    <a href="{{ route('categoria', 'espana') }}">España</a>
-                    <a href="{{ route('categoria', 'argentina') }}">Argentina</a>
-                    <a href="{{ route('categoria', 'brasil') }}">Brasil</a>
-                    <a href="{{ route('categoria', 'francia') }}">Francia</a>
-                    <a href="{{ route('categoria', 'alemania') }}">Alemania</a>
-                    <a href="{{ route('categoria', 'italia') }}">Italia</a>
-                    <a href="{{ route('categoria', 'inglaterra') }}">Inglaterra</a>
-                    <a href="{{ route('categoria', 'portugal') }}">Portugal</a>
-                    <a href="{{ route('categoria', 'mas2') }}">Más...</a>
+                    @foreach($selecciones as $cat)
+                        <a href="{{ route('categoria', $cat->slug) }}">{{ $cat->nombre }}</a>
+                    @endforeach
                 </div>
             </details>
+            @endif
 
+            {{-- RETRO --}}
+            @php $retro = $allCategories->where('grupo', 'Retro'); @endphp
+            @if($retro->count() > 0)
             <details class="dd">
                 <summary>RETRO <span class="chev">▾</span></summary>
                 <div class="dd-panel">
-                    <a href="{{ route('categoria', 'anos90') }}">Años 90</a>
-                    <a href="{{ route('categoria', 'anos2000') }}">Años 2000</a>
-                    <a href="{{ route('categoria', 'clasicas') }}">Clásicas</a>
+                    @foreach($retro as $cat)
+                        <a href="{{ route('categoria', $cat->slug) }}">{{ $cat->nombre }}</a>
+                    @endforeach
                 </div>
             </details>
+            @endif
 
-            <a href="{{ route('categoria', 'tallanino') }}">TALLA NIÑO</a>
+            {{-- TALLA NIÑO --}}
+            @php $tallaNino = $allCategories->where('slug', 'tallanino')->first(); @endphp
+            @if($tallaNino)
+                <a href="{{ route('categoria', 'tallanino') }}">TALLA NIÑO</a>
+            @endif
 
+            {{-- PANTALONES --}}
+            @php $pantalones = $allCategories->whereIn('slug', ['cortos', 'largos']); @endphp
+            @if($pantalones->count() > 0)
             <details class="dd">
                 <summary>PANTALONES <span class="chev">▾</span></summary>
                 <div class="dd-panel">
-                    <a href="{{ route('categoria', 'cortos') }}">Cortos</a>
-                    <a href="{{ route('categoria', 'largos') }}">Largos</a>
+                    @foreach($pantalones as $cat)
+                        <a href="{{ route('categoria', $cat->slug) }}">{{ $cat->nombre }}</a>
+                    @endforeach
                 </div>
             </details>
+            @endif
 
-            <a href="{{ route('categoria', 'botas') }}">BOTAS</a>
+            {{-- BOTAS --}}
+            @php $botas = $allCategories->where('slug', 'botas')->first(); @endphp
+            @if($botas)
+                <a href="{{ route('categoria', 'botas') }}">BOTAS</a>
+            @endif
 
+            {{-- BUFANDAS --}}
+            @php $bufandas = $allCategories->whereIn('slug', ['clubes', 'selecciones_bufandas', 'retro_bufandas']); @endphp
+            @if($bufandas->count() > 0)
             <details class="dd">
                 <summary>BUFANDAS <span class="chev">▾</span></summary>
                 <div class="dd-panel">
-                    <a href="{{ route('categoria', 'clubes') }}">Clubes</a>
-                    <a href="{{ route('categoria', 'selecciones') }}">Selecciones</a>
-                    <a href="{{ route('categoria', 'retro') }}">Retro</a>
+                    @foreach($bufandas as $cat)
+                        <a href="{{ route('categoria', $cat->slug) }}">{{ $cat->nombre }}</a>
+                    @endforeach
                 </div>
             </details>
+            @endif
 
         </div>
     </div>

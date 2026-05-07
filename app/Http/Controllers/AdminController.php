@@ -19,9 +19,10 @@ class AdminController extends Controller
         $totalCategorias = Category::count();
         $totalProductos = Product::count();
         $totalUsuarios = User::count();
+        $totalPedidos = \App\Models\Order::count();
 
         // 2. Cargamos la vista visual del panel ('admin.dashboard') y le "inyectamos"
-        // esas tres variables para que los numeros aparezcan en la pantalla.
-        return view('admin.dashboard', compact('totalCategorias', 'totalProductos', 'totalUsuarios'));
+        // esas variables para que los numeros aparezcan en la pantalla.
+        return view('admin.dashboard', compact('totalCategorias', 'totalProductos', 'totalUsuarios', 'totalPedidos'));
     }
 }

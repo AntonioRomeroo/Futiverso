@@ -62,6 +62,15 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     
     // Rutas para gestionar las categorías (CRUD completo)
     Route::resource('/admin/categories', AdminCategoryController::class)->names('admin.categories');
+
+    // Rutas para gestionar los usuarios
+    Route::resource('/admin/users', \App\Http\Controllers\AdminUserController::class)->names('admin.users');
+
+    // Rutas para gestionar los pedidos
+    Route::get('/admin/orders', [\App\Http\Controllers\AdminOrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/admin/orders/{order}', [\App\Http\Controllers\AdminOrderController::class, 'show'])->name('admin.orders.show');
+    Route::patch('/admin/orders/{order}/status', [\App\Http\Controllers\AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+    Route::delete('/admin/orders/{order}', [\App\Http\Controllers\AdminOrderController::class, 'destroy'])->name('admin.orders.destroy');
 });
 
 

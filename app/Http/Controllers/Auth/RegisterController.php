@@ -16,6 +16,22 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
+        // 0. Validar reCAPTCHA
+        $recaptcha_response = $request->input('g-recaptcha-response');
+        
+        if (is_null($recaptcha_response)) {
+            return redirect()->back()->withErrors(['captcha' => 'Por favor, completa el reCAPTCHA.'])->withInput();
+        }
+
+        $response = \Illuminate\Support\Facades\Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $recaptcha_response,
+        ]);
+
+        if (!$response->json()['success']) {
+            return redirect()->back()->withErrors(['captcha' => 'La verificación de reCAPTCHA ha fallado.'])->withInput();
+        }
+
         // 1. Validamos que los datos introducidos sean correctos.
         // - El correo debe ser unico (no existir ya en la tabla 'users')
         // - La contraseña debe tener al menos 8 caracteres y coincidir con la de repeticion (confirmed)
