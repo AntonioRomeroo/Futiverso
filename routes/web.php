@@ -30,6 +30,9 @@ Route::get('/novedades', function () {
     return view('novedades');
 })->name('novedades');
 
+// Ruta para el buscador de productos
+Route::get('/buscar', \App\Http\Controllers\SearchController::class)->name('buscar');
+
 
 // --------------------------------------------------------------------------
 // RUTAS DE INICIO Y CIERRE DE SESION

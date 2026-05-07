@@ -7,7 +7,12 @@
         </div>
 
         <div class="search">
-            <input type="search" placeholder="(EJ: 'Camiseta España')">
+            <form action="{{ route('buscar') }}" method="GET">
+                <input type="text" name="q" placeholder="(EJ: 'Camiseta España')" value="{{ request('q') }}">
+                <button type="submit" aria-label="Buscar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
         </div>
 
         @guest
