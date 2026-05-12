@@ -1,64 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Futiverso ⚽✨
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Futiverso es una plataforma de comercio electrónico especializada en la venta de equipaciones de fútbol exclusivas, camisetas retro y artículos deportivos para apasionados del deporte rey. Este proyecto ha sido desarrollado como una aplicación web moderna y robusta utilizando el framework Laravel.
 
-## About Laravel
+## 🚀 Funcionalidades Principales
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Para Usuarios (Clientes)
+- **Catálogo Dinámico:** Navegación por categorías (Ligas, Retro, Botas, Accesorios).
+- **Personalización de Productos:** Opción de añadir nombre y número a las camisetas.
+- **Carrito de Compra:** Gestión intuitiva de productos con validación de stock.
+- **Sistema de Cupones:** Aplicación de códigos de descuento en tiempo real.
+- **Lista de Deseos (Wishlist):** Guardado de productos favoritos mediante iconos de corazón.
+- **Historial de Pedidos:** Panel de usuario para consultar compras realizadas y estados de envío.
+- **Perfil de Usuario:** Personalización de datos y subida de imagen de perfil (Avatar).
+- **Buscador Inteligente:** Búsqueda rápida de productos por nombre o descripción.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Para Administradores (Backoffice)
+- **Dashboard de Estadísticas:** Resumen visual de productos, categorías y ventas.
+- **Gestión de Inventario (CRUD):** Creación, edición y borrado de productos y categorías.
+- **Gestión de Pedidos:** Control total sobre los estados de los pedidos (Aceptado, Enviado, Cancelado, etc.).
+- **Gestión de Cupones:** Creación de ofertas fijas o porcentuales con fechas de expiración.
+- **Control de Usuarios:** Listado y gestión de cuentas registradas.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Tecnologías Utilizadas
+- **Backend:** [Laravel 8.x](https://laravel.com/) (PHP 8.x)
+- **Frontend:** Blade Templating Engine, Vanilla CSS, FontAwesome 6.
+- **Base de Datos:** MySQL / MariaDB.
+- **Gestión de Dependencias:** Composer & NPM.
 
-## Learning Laravel
+## 📦 Instalación y Configuración
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Sigue estos pasos para poner en marcha el proyecto localmente:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Clonar el repositorio:**
+   ```bash
+   git clone <url-del-repositorio>
+   cd Futiverso2
+   ```
 
-## Laravel Sponsors
+2. **Instalar dependencias de PHP:**
+   ```bash
+   composer install
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. **Configurar el entorno:**
+   - Copia el archivo `.env.example` a `.env`.
+   - Configura tus credenciales de base de datos en el archivo `.env`.
+   ```bash
+   cp .env.example .env
+   ```
 
-### Premium Partners
+4. **Generar la clave de aplicación:**
+   ```bash
+   php artisan key:generate
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+5. **Ejecutar migraciones y seeders:**
+   Este comando creará las tablas necesarias y cargará los datos de prueba (incluyendo el admin).
+   ```bash
+   php artisan migrate --seed
+   ```
 
-## Contributing
+6. **Enlazar el almacenamiento (Storage):**
+   Para que las imágenes se visualicen correctamente:
+   ```bash
+   php artisan storage:link
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+7. **Iniciar servidor local:**
+   ```bash
+   php artisan serve
+   ```
 
-## Code of Conduct
+## 🔑 Usuarios de Prueba
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Para probar todas las funcionalidades, puedes utilizar las siguientes credenciales:
 
-## Security Vulnerabilities
+### Administrador (Acceso total al Panel)
+- **Email:** `admin@futiverso.com`
+- **Password:** `Futiverso2026!`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Usuario Estándar
+- Puedes registrar un nuevo usuario directamente desde el modal de "Registrarse" en la web para probar el flujo completo de compra.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
