@@ -12,16 +12,16 @@
         </div>
 
         @if(count($cart) > 0)
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: start;">
+            <div class="responsive-grid-checkout">
                 
                 {{-- Lista de Productos --}}
-                <div style="background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow: hidden;">
+                <div class="table-responsive" style="background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow: hidden;">
                     <table style="width: 100%; border-collapse: collapse; text-align: left;">
                         <thead style="background: #f8f9fa;">
                             <tr>
                                 <th style="padding: 20px; color: #777; font-size: 14px; text-transform: uppercase;">Producto</th>
-                                <th style="padding: 20px; color: #777; font-size: 14px; text-transform: uppercase;">Talla</th>
-                                <th style="padding: 20px; color: #777; font-size: 14px; text-transform: uppercase;">Precio</th>
+                                <th class="mobile-hide" style="padding: 20px; color: #777; font-size: 14px; text-transform: uppercase;">Talla</th>
+                                <th class="mobile-hide" style="padding: 20px; color: #777; font-size: 14px; text-transform: uppercase;">Precio</th>
                                 <th style="padding: 20px; color: #777; font-size: 14px; text-transform: uppercase;">Cantidad</th>
                                 <th style="padding: 20px; color: #777; font-size: 14px; text-transform: uppercase; text-align: right;">Subtotal</th>
                             </tr>
@@ -48,8 +48,8 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td style="padding: 20px; font-weight: bold; color: #555;">{{ $item['talla'] }}</td>
-                                    <td style="padding: 20px; color: #777;">{{ number_format($item['price'], 2) }} €</td>
+                                    <td class="mobile-hide" style="padding: 20px; font-weight: bold; color: #555;">{{ $item['talla'] }}</td>
+                                    <td class="mobile-hide" style="padding: 20px; color: #777;">{{ number_format($item['price'], 2) }} €</td>
                                     <td style="padding: 20px;">
                                         <div style="display: flex; align-items: center; gap: 10px; background: #f1f2f6; width: fit-content; padding: 5px 10px; border-radius: 50px;">
                                             {{-- Botón Menos --}}
@@ -106,9 +106,9 @@
                         <span style="font-size: 22px; font-weight: bold; color: #F7B633;">{{ number_format($total, 2) }} €</span>
                     </div>
 
-                    <button style="width: 100%; background: #F7B633; color: #070D59; border: none; padding: 15px; border-radius: 10px; font-weight: bold; font-size: 18px; margin-top: 30px; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                    <a href="{{ route('checkout.index') }}" style="display: block; text-align: center; text-decoration: none; width: 100%; background: #F7B633; color: #070D59; border: none; padding: 15px; border-radius: 10px; font-weight: bold; font-size: 18px; margin-top: 30px; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
                         FINALIZAR PEDIDO <i class="fa-solid fa-arrow-right"></i>
-                    </button>
+                    </a>
                     
                     <p style="text-align: center; font-size: 12px; margin-top: 15px; opacity: 0.6;">
                         <i class="fa-solid fa-lock"></i> Pago 100% seguro y garantizado

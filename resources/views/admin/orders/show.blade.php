@@ -41,7 +41,12 @@
                                             <img src="{{ asset('storage/' . $item->product->imagen) }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                                             <div>
                                                 <div style="font-weight: bold; color: #070D59;">{{ $item->product->nombre }}</div>
-                                                <div style="font-size: 12px; color: #999;">Ref: #{{ $item->product->id }}</div>
+                                                <div style="font-size: 12px; color: #999;">Talla: {{ $item->talla }} | Ref: #{{ $item->product->id }}</div>
+                                                @if($item->custom_name || $item->custom_number)
+                                                    <div style="font-size: 11px; color: #F7B633; font-weight: bold;">
+                                                        <i class="fa-solid fa-pen-nib"></i> {{ $item->custom_name }} #{{ $item->custom_number }}
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>

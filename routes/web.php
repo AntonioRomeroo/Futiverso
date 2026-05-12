@@ -97,6 +97,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perfil', [\App\Http\Controllers\ProfileController::class, 'show'])->name('perfil');
     // Guarda los cambios de tu nombre o foto cuando envias el formulario.
     Route::post('/perfil', [\App\Http\Controllers\ProfileController::class, 'update'])->name('perfil.update');
+
+    // Rutas de Checkout
+    Route::get('/checkout', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [\App\Http\Controllers\CheckoutController::class, 'process'])->name('checkout.process');
 });
 
 

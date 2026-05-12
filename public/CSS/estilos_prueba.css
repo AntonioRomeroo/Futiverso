@@ -757,5 +757,40 @@ footer {
   opacity: .6;
 }
 
-/* Responsive */
-/* Eliminadas consultas antiguas que rompían el footer */
+/* =========================
+   RESPONSIVE UTILITIES
+   ========================= */
+
+.responsive-grid-checkout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+@media (min-width: 992px) {
+    .responsive-grid-checkout {
+        grid-template-columns: 1.5fr 1fr;
+    }
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+    .cart-item-row {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    
+    .mobile-hide {
+        display: none !important;
+    }
+    
+    .mobile-full-width {
+        width: 100% !important;
+        max-width: none !important;
+    }
+}
