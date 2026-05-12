@@ -117,4 +117,38 @@ class CartController extends Controller
 
         return redirect()->back()->with('success', 'Producto eliminado del carrito.');
     }
+
+    /**
+     * Aplica un cupón de descuento al carrito.
+     */
+    public function applyCoupon(Request $request)
+    {
+        $request->validate([
+            'coupon_code' => 'required|string'
+        ]);
+
+        $coupon = \App\Models\Coupon::where('code', $request->coupon_code)->first();
+
+        if (!$coupon || !$coupon->isValid()) {
+            return redirect()->back()->with('error', 'El cupón no es válido o ha expirado.');
+        }
+
+        session()->put('coupon', [
+            'id' => $coupon->id,
+            'code' => $coupon->code,
+            'type' => $coupon->type,
+            'value' => $coupon->value
+        ]);
+
+        return redirect()->back()->with('success', 'Cupón aplicado correctamente.');
+    }
+
+    /**
+     * Elimina el cupón aplicado.
+     */
+    public function removeCoupon()
+    {
+        session()->forget('coupon');
+        return redirect()->back()->with('success', 'Cupón eliminado.');
+    }
 }

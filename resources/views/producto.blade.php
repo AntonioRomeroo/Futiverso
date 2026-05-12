@@ -37,6 +37,25 @@
                 @else
                     <i class="fa-solid fa-shirt" style="font-size: 150px; color: #eee; padding: 100px 0;"></i>
                 @endif
+
+                {{-- Botón de Favoritos (Wishlist) --}}
+                <div style="position: absolute; top: 20px; right: 20px; z-index: 5;">
+                    @auth
+                        @php
+                            $inWishlist = Auth::user()->wishlist->where('product_id', $producto->id)->first();
+                        @endphp
+                        <form action="{{ route('wishlist.toggle', $producto->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" style="background: white; border: none; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1); color: {{ $inWishlist ? '#e74c3c' : '#ccc' }}; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                                <i class="fa-{{ $inWishlist ? 'solid' : 'regular' }} fa-heart"></i>
+                            </button>
+                        </form>
+                    @else
+                        <button onclick="alert('Inicia sesión para guardar tus favoritos')" style="background: white; border: none; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1); color: #ccc;">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    @endauth
+                </div>
             </div>
 
             {{-- Columna Derecha: Detalles --}}

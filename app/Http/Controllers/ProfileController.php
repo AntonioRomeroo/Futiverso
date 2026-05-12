@@ -68,4 +68,26 @@ class ProfileController extends Controller
         // Devolvemos al usuario a la misma pagina pero mostrandole un mensajito verde de exito.
         return back()->with('success', 'Perfil actualizado correctamente.');
     }
+
+    /**
+     * Muestra el historial de pedidos del usuario.
+     */
+    public function orders()
+    {
+        // Obtenemos los pedidos del usuario autenticado, ordenados por los más recientes
+        $orders = Auth::user()->orders()->latest()->paginate(10);
+        
+        return view('perfil.pedidos', compact('orders'));
+    }
+
+    /**
+     * Muestra los detalles de un pedido específico del usuario.
+     */
+    public function orderDetails($id)
+    {
+        // Buscamos el pedido asegurándonos de que pertenezca al usuario actual
+        $order = Auth::user()->orders()->with('items.product')->findOrFail($id);
+        
+        return view('perfil.pedido_detalle', compact('order'));
+    }
 }

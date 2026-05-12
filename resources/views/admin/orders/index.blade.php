@@ -36,32 +36,41 @@
                             <td style="padding: 15px; color: #777;">{{ $order->created_at->format('d/m/Y H:i') }}</td>
                             <td style="padding: 15px; font-weight: bold; color: #070D59;">{{ number_format($order->total, 2) }}€</td>
                             <td style="padding: 15px;">
-                                @php
-                                    $statusColors = [
-                                        'Pendiente' => ['bg' => '#f1c40f', 'text' => '#000'],
-                                        'Aceptado' => ['bg' => '#3498db', 'text' => '#fff'],
-                                        'Embalado' => ['bg' => '#9b59b6', 'text' => '#fff'],
-                                        'En camino' => ['bg' => '#e67e22', 'text' => '#fff'],
-                                        'Entregado' => ['bg' => '#2ecc71', 'text' => '#fff'],
-                                        'Cancelado' => ['bg' => '#e74c3c', 'text' => '#fff'],
-                                    ];
-                                    $color = $statusColors[$order->status] ?? ['bg' => '#7f8c8d', 'text' => '#fff'];
-                                @endphp
-                                <span style="background: {{ $color['bg'] }}; color: {{ $color['text'] }}; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
-                                    {{ $order->status }}
-                                </span>
+                                <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST" style="display: flex; gap: 5px; align-items: center;">
+                                    @csrf
+                                    @method('PATCH')
+                                    <select name="status" onchange="this.form.submit()" style="padding: 5px; border-radius: 5px; border: 1px solid #ddd; font-size: 12px; font-weight: bold; color: #070D59;">
+                                        @foreach(['Pendiente', 'Aceptado', 'Embalado', 'En camino', 'Entregado', 'Cancelado'] as $st)
+                                            <option value="{{ $st }}" {{ $order->status == $st ? 'selected' : '' }}>{{ $st }}</option>
+                                        @endforeach
+                                    </select>
+                                </form>
                             </td>
                             <td style="padding: 15px; text-align: center;">
-                                <a href="{{ route('admin.orders.show', $order->id) }}" style="color: #070D59; margin-right: 15px; text-decoration: none;" title="Ver Detalles">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Eliminar pedido?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" style="background: none; border: none; color: #e74c3c; cursor: pointer; padding: 0;" title="Eliminar">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </form>
+                                <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+                                    <a href="{{ route('admin.orders.show', $order->id) }}" style="color: #070D59; text-decoration: none; background: #eee; padding: 5px 8px; border-radius: 4px;" title="Ver Detalles">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    
+                                    @if($order->status !== 'Cancelado')
+                                        <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST" style="margin: 0;">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="Cancelado">
+                                            <button type="submit" style="background: #e67e22; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer;" title="Anular/Cancelar Pedido" onclick="return confirm('¿Seguro que quieres cancelar este pedido?')">
+                                                <i class="fa-solid fa-ban"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+
+                                    <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" style="margin: 0;" onsubmit="return confirm('¿Eliminar pedido permanentemente de la base de datos?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" style="background: #e74c3c; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer;" title="Eliminar Registro">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

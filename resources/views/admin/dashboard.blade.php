@@ -50,6 +50,14 @@
                 <a href="{{ route('admin.orders.index') }}" style="display: inline-block; margin-top: 15px; background: #070D59; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; text-decoration: none;">Gestionar</a>
             </div>
 
+            {{-- Tarjeta Cupones --}}
+            <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
+                <i class="fa-solid fa-ticket" style="font-size: 40px; color: #F7B633; margin-bottom: 15px;"></i>
+                <h2 style="color: #070D59; font-size: 36px; margin: 0;">{{ $totalCupones }}</h2>
+                <p style="color: #777; margin-top: 5px;">Cupones / Descuentos</p>
+                <a href="{{ route('admin.coupons.index') }}" style="display: inline-block; margin-top: 15px; background: #070D59; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; text-decoration: none;">Gestionar</a>
+            </div>
+
         </div>
     </div>
 </div>

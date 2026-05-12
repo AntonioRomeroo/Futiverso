@@ -32,7 +32,19 @@ class CheckoutController extends Controller
             $total += $item['price'] * $item['quantity'];
         }
 
-        return view('checkout', compact('cart', 'total'));
+        // Calcular descuento si hay cupón en la sesión
+        $discount = 0;
+        if (session('coupon')) {
+            $c = session('coupon');
+            if ($c['type'] === 'fixed') {
+                $discount = $c['value'];
+            } else {
+                $discount = ($c['value'] / 100) * $total;
+            }
+        }
+        $finalTotal = max(0, $total - $discount);
+
+        return view('checkout', compact('cart', 'total', 'discount', 'finalTotal'));
     }
 
     /**
@@ -61,10 +73,22 @@ class CheckoutController extends Controller
                 $total += $item['price'] * $item['quantity'];
             }
 
+            // APLICAR DESCUENTO SI HAY CUPÓN
+            $discount = 0;
+            if (session('coupon')) {
+                $c = session('coupon');
+                if ($c['type'] === 'fixed') {
+                    $discount = $c['value'];
+                } else {
+                    $discount = ($c['value'] / 100) * $total;
+                }
+            }
+            $finalTotal = max(0, $total - $discount);
+
             // 2. Crear el pedido
             $order = Order::create([
                 'user_id' => Auth::id(),
-                'total' => $total,
+                'total' => $finalTotal,
                 'status' => 'Pendiente',
                 'address' => $request->address,
                 'phone' => $request->phone,
@@ -95,8 +119,8 @@ class CheckoutController extends Controller
 
             DB::commit();
 
-            // 4. Limpiar carrito
-            session()->forget('cart');
+            // 4. Limpiar carrito y cupón
+            session()->forget(['cart', 'coupon']);
 
             return redirect()->route('inicio')->with('success', '¡Pedido realizado con éxito! Gracias por confiar en Futiverso.');
 

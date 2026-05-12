@@ -49,7 +49,7 @@
                     <button type="submit" style="width: 100%; background: #070D59; color: white; border: none; padding: 18px; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; transition: all 0.2s; box-shadow: 0 5px 15px rgba(7, 13, 89, 0.2);"
                         onmouseover="this.style.background='#F7B633'; this.style.color='#070D59'; this.style.transform='translateY(-2px)'"
                         onmouseout="this.style.background='#070D59'; this.style.color='white'; this.style.transform='translateY(0)'">
-                        CONFIRMAR Y PAGAR {{ number_format($total, 2) }} €
+                        CONFIRMAR Y PAGAR {{ number_format($finalTotal, 2) }} €
                     </button>
                 </form>
             </div>
@@ -87,13 +87,21 @@
                         <span>Subtotal</span>
                         <span>{{ number_format($total, 2) }} €</span>
                     </div>
+
+                    @if($discount > 0)
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #e74c3c; font-weight: bold;">
+                            <span>Descuento (Cupón: {{ session('coupon')['code'] }})</span>
+                            <span>- {{ number_format($discount, 2) }} €</span>
+                        </div>
+                    @endif
+
                     <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #555;">
                         <span>Envío</span>
                         <span style="color: #2ecc71; font-weight: bold;">GRATIS</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 20px; font-weight: bold; color: #070D59;">
                         <span>TOTAL</span>
-                        <span style="color: #F7B633;">{{ number_format($total, 2) }} €</span>
+                        <span style="color: #F7B633;">{{ number_format($finalTotal, 2) }} €</span>
                     </div>
                 </div>
 

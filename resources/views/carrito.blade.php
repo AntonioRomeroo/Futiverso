@@ -11,6 +11,18 @@
             </a>
         </div>
 
+        @if(session('success'))
+            <div style="background: #2ecc71; color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-weight: bold;">
+                <i class="fa-solid fa-check-circle"></i> {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-weight: bold;">
+                <i class="fa-solid fa-exclamation-triangle"></i> {{ session('error') }}
+            </div>
+        @endif
+
         @if(count($cart) > 0)
             <div class="responsive-grid-checkout">
                 
@@ -100,10 +112,49 @@
                         <span>Gastos de envío</span>
                         <span>Gratis</span>
                     </div>
+
+                    @php
+                        $discount = 0;
+                        if(session('coupon')) {
+                            $c = session('coupon');
+                            if($c['type'] === 'fixed') {
+                                $discount = $c['value'];
+                            } else {
+                                $discount = ($c['value'] / 100) * $total;
+                            }
+                        }
+                    @endphp
+
+                    @if(session('coupon'))
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 16px; color: #F7B633; font-weight: bold;">
+                            <span>Descuento ({{ session('coupon')['code'] }})</span>
+                            <span>-{{ number_format($discount, 2) }} €</span>
+                        </div>
+                    @endif
                     
                     <div style="display: flex; justify-content: space-between; border-top: 2px solid #F7B633; padding-top: 20px; margin-top: 20px;">
                         <span style="font-size: 22px; font-weight: bold;">TOTAL</span>
-                        <span style="font-size: 22px; font-weight: bold; color: #F7B633;">{{ number_format($total, 2) }} €</span>
+                        <span style="font-size: 22px; font-weight: bold; color: #F7B633;">{{ number_format($total - $discount, 2) }} €</span>
+                    </div>
+
+                    {{-- Sección de Cupón --}}
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        @if(!session('coupon'))
+                            <form action="{{ route('cart.coupon') }}" method="POST" style="display: flex; gap: 10px;">
+                                @csrf
+                                <input type="text" name="coupon_code" placeholder="Código de cupón" required style="flex: 1; padding: 10px; border-radius: 5px; border: none; outline: none; color: #333;">
+                                <button type="submit" style="background: #F7B633; color: #070D59; border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">APLICAR</button>
+                            </form>
+                        @else
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 5px;">
+                                <span style="font-size: 14px;">Cupón <strong>{{ session('coupon')['code'] }}</strong> aplicado</span>
+                                <form action="{{ route('cart.removeCoupon') }}" method="POST" style="margin: 0;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 16px;" title="Eliminar cupón"><i class="fa-solid fa-times-circle"></i></button>
+                                </form>
+                            </div>
+                        @endif
                     </div>
 
                     <a href="{{ route('checkout.index') }}" style="display: block; text-align: center; text-decoration: none; width: 100%; background: #F7B633; color: #070D59; border: none; padding: 15px; border-radius: 10px; font-weight: bold; font-size: 18px; margin-top: 30px; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">

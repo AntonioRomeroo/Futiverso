@@ -40,6 +40,25 @@
                                     @else
                                         <i class="fa-solid fa-shirt" style="font-size: 100px; color: #eee;"></i>
                                     @endif
+
+                                    {{-- Botón Favoritos (Esquina Inferior Derecha) --}}
+                                    @auth
+                                        @php
+                                            $inWishlist = Auth::user()->wishlist->where('product_id', $producto->id)->first();
+                                        @endphp
+                                        <form action="{{ route('wishlist.toggle', $producto->id) }}" method="POST" style="position: absolute; bottom: 10px; right: 10px; z-index: 5;">
+                                            @csrf
+                                            <button type="submit" style="background: rgba(255,255,255,0.9); border: none; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: {{ $inWishlist ? '#e74c3c' : '#ccc' }}; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                                                <i class="fa-{{ $inWishlist ? 'solid' : 'regular' }} fa-heart"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <div style="position: absolute; bottom: 10px; right: 10px; z-index: 5;">
+                                            <button onclick="alert('Inicia sesión para guardar favoritos')" style="background: rgba(255,255,255,0.9); border: none; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; color: #ccc;">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    @endauth
                                 </div>
                             </a>
                             <div style="padding: 20px;">

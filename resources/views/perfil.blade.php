@@ -245,6 +245,10 @@
             <button type="submit" class="btn-save">
                 Guardar Cambios
             </button>
+
+            <a href="{{ route('perfil.pedidos') }}" style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 15px; color: #070D59; text-decoration: none; font-weight: 700; font-size: 14px; padding: 12px; border: 2px solid #070D59; border-radius: 10px; transition: all 0.3s ease;" onmouseover="this.style.background='#070D59'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='#070D59'">
+                <i class="fa-solid fa-box"></i> Ver mis pedidos
+            </a>
         </form>
     </div>
 </div>

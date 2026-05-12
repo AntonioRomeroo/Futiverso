@@ -16,8 +16,20 @@
         </div>
 
         <div style="display: flex; align-items: center; gap: 20px; justify-self: end;">
+            {{-- Icono de Wishlist (Favoritos) --}}
+            <a href="{{ route('wishlist.index') }}" style="position: relative; color: #070D59; text-decoration: none; font-size: 24px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" title="Mis Favoritos">
+                <i class="fa-solid fa-heart"></i>
+                @auth
+                    @if(Auth::user()->wishlist->count() > 0)
+                        <span style="position: absolute; top: -10px; right: -12px; background: #e74c3c; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; border: 2px solid white;">
+                            {{ Auth::user()->wishlist->count() }}
+                        </span>
+                    @endif
+                @endauth
+            </a>
+
             {{-- Icono del Carrito --}}
-            <a href="{{ route('cart.index') }}" style="position: relative; color: #070D59; text-decoration: none; font-size: 24px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <a href="{{ route('cart.index') }}" style="position: relative; color: #070D59; text-decoration: none; font-size: 24px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" title="Carrito de Compra">
                 <i class="fa-solid fa-cart-shopping"></i>
                 @if(session('cart') && count(session('cart')) > 0)
                     <span style="position: absolute; top: -10px; right: -12px; background: #F7B633; color: #070D59; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; border: 2px solid white;">
@@ -79,6 +91,7 @@
                         <a href="{{ route('admin.dashboard') }}" class="dropdown-item">⚙️ Panel de Control</a>
                     @endif
                     <a href="{{ route('perfil') }}" class="dropdown-item">👤 Mi Perfil</a>
+                    <a href="{{ route('perfil.pedidos') }}" class="dropdown-item">📦 Mis Pedidos</a>
                     <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
                         @csrf
                         <button type="submit" class="dropdown-item" style="width: 100%; border: none; background: none; color: #dc3545; cursor: pointer; text-align: left;">🚪 Cerrar sesión</button>

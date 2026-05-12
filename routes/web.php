@@ -40,6 +40,8 @@ Route::post('/carrito/añadir', [\App\Http\Controllers\CartController::class, 'a
 Route::patch('/carrito/incrementar/{key}', [\App\Http\Controllers\CartController::class, 'increment'])->name('cart.increment');
 Route::patch('/carrito/decrementar/{key}', [\App\Http\Controllers\CartController::class, 'decrement'])->name('cart.decrement');
 Route::delete('/carrito/eliminar/{key}', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+Route::post('/carrito/cupon', [\App\Http\Controllers\CartController::class, 'applyCoupon'])->name('cart.coupon');
+Route::delete('/carrito/cupon', [\App\Http\Controllers\CartController::class, 'removeCoupon'])->name('cart.removeCoupon');
 
 
 // --------------------------------------------------------------------------
@@ -84,6 +86,9 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin/orders/{order}', [\App\Http\Controllers\AdminOrderController::class, 'show'])->name('admin.orders.show');
     Route::patch('/admin/orders/{order}/status', [\App\Http\Controllers\AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
     Route::delete('/admin/orders/{order}', [\App\Http\Controllers\AdminOrderController::class, 'destroy'])->name('admin.orders.destroy');
+
+    // Rutas para gestionar los cupones
+    Route::resource('/admin/coupons', \App\Http\Controllers\AdminCouponController::class)->names('admin.coupons');
 });
 
 
@@ -93,10 +98,16 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 
 // Cualquier persona que haya iniciado sesion ('auth') puede entrar aqui, sea admin o no.
 Route::middleware(['auth'])->group(function () {
-    // Muestra la pagina para editar tu perfil.
+    // Rutas de Perfil y Pedidos
     Route::get('/perfil', [\App\Http\Controllers\ProfileController::class, 'show'])->name('perfil');
-    // Guarda los cambios de tu nombre o foto cuando envias el formulario.
     Route::post('/perfil', [\App\Http\Controllers\ProfileController::class, 'update'])->name('perfil.update');
+    Route::get('/perfil/pedidos', [\App\Http\Controllers\ProfileController::class, 'orders'])->name('perfil.pedidos');
+    Route::get('/perfil/pedidos/{id}', [\App\Http\Controllers\ProfileController::class, 'orderDetails'])->name('perfil.pedido_detalle');
+
+    // Rutas de Wishlist
+    Route::get('/wishlist', [\App\Http\Controllers\WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/toggle/{product}', [\App\Http\Controllers\WishlistController::class, 'toggle'])->name('wishlist.toggle');
+    Route::delete('/wishlist/{wishlist}', [\App\Http\Controllers\WishlistController::class, 'remove'])->name('wishlist.remove');
 
     // Rutas de Checkout
     Route::get('/checkout', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
