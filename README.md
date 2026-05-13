@@ -5,7 +5,7 @@ Futiverso es una plataforma de comercio electrónico especializada en la venta d
 ## 🚀 Funcionalidades Principales
 
 ### Para Usuarios (Clientes)
-- **Catálogo Dinámico:** Navegación por categorías (Ligas, Retro, Botas, Accesorios).
+- **Catálogo Dinámico:** Navegación por categorías (Ligas, Retro, Botas, Bufandas).
 - **Personalización de Productos:** Opción de añadir nombre y número a las camisetas.
 - **Carrito de Compra:** Gestión intuitiva de productos con validación de stock.
 - **Sistema de Cupones:** Aplicación de códigos de descuento en tiempo real.
