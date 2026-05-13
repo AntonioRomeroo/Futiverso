@@ -24,7 +24,7 @@ Futiverso es una plataforma de comercio electrónico especializada en la venta d
 ## 🛠️ Tecnologías Utilizadas
 - **Backend:** [Laravel 8.x](https://laravel.com/) (PHP 8.x)
 - **Frontend:** Blade Templating Engine, Vanilla CSS, FontAwesome 6.
-- **Base de Datos:** MySQL / MariaDB.
+- **Base de Datos:** SQLite 
 - **Gestión de Dependencias:** Composer & NPM.
 
 ## 📦 Instalación y Configuración
