@@ -20,7 +20,7 @@
                 </article>
 
                 <article class="sq" data-sqcarousel data-interval="3200">
-                    <a class="sq-cardlink" href="{{ route('novedades') }}">
+                    <a class="sq-cardlink" href="{{ route('mas_vendidos') }}">
                         <div class="sq-viewport">
                             <div class="sq-track">
                                 <img src="{{ asset('Imagenes/Camisetas Carrusel/camiseta_antequera.png') }}" alt="Camiseta Antequera">

@@ -2,8 +2,8 @@
     <div class="top-grid">
         <div></div>
         <div class="menu">
-
-            {{-- CAMISETAS 25/26 (Ligas) --}}
+ 
+             {{-- CAMISETAS 25/26 (Ligas) --}}
             @php $ligas = $allCategories->where('grupo', 'Ligas'); @endphp
             @if($ligas->count() > 0)
             <details class="dd">

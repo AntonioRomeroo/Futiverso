@@ -31,6 +31,9 @@ Route::get('/novedades', [App\Http\Controllers\PublicProductController::class, '
 // Pagina para ver las ofertas de la tienda.
 Route::get('/ofertas', [App\Http\Controllers\PublicProductController::class, 'ofertas'])->name('ofertas');
 
+// Pagina para ver los productos mas vendidos.
+Route::get('/mas-vendidos', [App\Http\Controllers\PublicProductController::class, 'masVendidos'])->name('mas_vendidos');
+
 // Ruta para el buscador de productos
 Route::get('/buscar', \App\Http\Controllers\SearchController::class)->name('buscar');
 
@@ -114,6 +117,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout', [\App\Http\Controllers\CheckoutController::class, 'process'])->name('checkout.process');
 });
 
+
+// --------------------------------------------------------------------------
+// PAGINAS ESTATICAS (Footer)
+// --------------------------------------------------------------------------
+Route::get('/p/sobre-nosotros', [\App\Http\Controllers\PageController::class, 'about'])->name('pages.about');
+Route::get('/p/preguntas-frecuentes', [\App\Http\Controllers\PageController::class, 'faq'])->name('pages.faq');
+Route::get('/p/envios-y-devoluciones', [\App\Http\Controllers\PageController::class, 'shipping'])->name('pages.shipping');
+Route::get('/p/contacto', [\App\Http\Controllers\PageController::class, 'contact'])->name('pages.contact');
+Route::get('/p/seguimiento-pedido', [\App\Http\Controllers\PageController::class, 'tracking'])->name('pages.tracking');
+Route::get('/p/politica-privacidad', [\App\Http\Controllers\PageController::class, 'privacy'])->name('pages.privacy');
+Route::get('/p/politica-cookies', [\App\Http\Controllers\PageController::class, 'cookies'])->name('pages.cookies');
+Route::get('/p/terminos-condiciones', [\App\Http\Controllers\PageController::class, 'terms'])->name('pages.terms');
 
 // --------------------------------------------------------------------------
 // RUTAS DINAMICAS DE TIENDA (Públicas)

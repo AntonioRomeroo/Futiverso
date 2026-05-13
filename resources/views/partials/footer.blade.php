@@ -113,26 +113,26 @@
         <div class="footer__col">
             <h3 class="footer__title">Ayuda</h3>
             <ul class="footer__list">
-                <li><a href="#">Envíos y devoluciones</a></li>
-                <li><a href="#">Preguntas frecuentes</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Seguimiento de pedido</a></li>
+                <li><a href="{{ route('pages.shipping') }}">Envíos y devoluciones</a></li>
+                <li><a href="{{ route('pages.faq') }}">Preguntas frecuentes</a></li>
+                <li><a href="{{ route('pages.contact') }}">Contacto</a></li>
+                <li><a href="{{ route('pages.tracking') }}">Seguimiento de pedido</a></li>
             </ul>
         </div>
 
         <div class="footer__col">
             <h3 class="footer__title">Empresa</h3>
             <ul class="footer__list">
-                <li><a href="#">Sobre nosotros</a></li>
+                <li><a href="{{ route('pages.about') }}">Sobre nosotros</a></li>
             </ul>
         </div>
 
         <div class="footer__col">
             <h3 class="footer__title">Legal</h3>
             <ul class="footer__list">
-                <li><a href="#">Política de privacidad</a></li>
-                <li><a href="#">Política de cookies</a></li>
-                <li><a href="#">Términos y condiciones</a></li>
+                <li><a href="{{ route('pages.privacy') }}">Política de privacidad</a></li>
+                <li><a href="{{ route('pages.cookies') }}">Política de cookies</a></li>
+                <li><a href="{{ route('pages.terms') }}">Términos y condiciones</a></li>
             </ul>
         </div>
 
