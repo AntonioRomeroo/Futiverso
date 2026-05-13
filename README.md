@@ -1,8 +1,8 @@
-# Futiverso ⚽✨
+# Futiverso 
 
 Futiverso es una plataforma de comercio electrónico especializada en la venta de equipaciones de fútbol exclusivas, camisetas retro y artículos deportivos para apasionados del deporte rey. Este proyecto ha sido desarrollado como una aplicación web moderna y robusta utilizando el framework Laravel.
 
-## 🚀 Funcionalidades Principales
+##  Funcionalidades Principales
 
 ### Para Usuarios (Clientes)
 - **Catálogo Dinámico:** Navegación por categorías (Ligas, Retro, Botas, Bufandas).
@@ -21,13 +21,13 @@ Futiverso es una plataforma de comercio electrónico especializada en la venta d
 - **Gestión de Cupones:** Creación de ofertas fijas o porcentuales con fechas de expiración.
 - **Control de Usuarios:** Listado y gestión de cuentas registradas.
 
-## 🛠️ Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 - **Backend:** [Laravel 8.x](https://laravel.com/) (PHP 8.x)
 - **Frontend:** Blade Templating Engine, Vanilla CSS, FontAwesome 6.
 - **Base de Datos:** SQLite 
 - **Gestión de Dependencias:** Composer & NPM.
 
-## 📦 Instalación y Configuración
+##  Instalación y Configuración
 
 Sigue estos pasos para poner en marcha el proyecto localmente:
 
@@ -71,7 +71,7 @@ Sigue estos pasos para poner en marcha el proyecto localmente:
    php artisan serve
    ```
 
-## 🔑 Usuarios de Prueba
+##  Usuarios de Prueba
 
 Para probar todas las funcionalidades, puedes utilizar las siguientes credenciales:
 
