@@ -13,21 +13,17 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
+     * fillable: Los datos básicos del usuario que podemos rellenar desde un formulario (Registro o Perfil).
      */
     protected $fillable = [
         'name',
         'email',
         'password',
-        'avatar',
+        'avatar', // Imagen de perfil personalizada
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * hidden: Datos sensibles que JAMÁS deben mostrarse al hacer consultas, por seguridad.
      */
     protected $hidden = [
         'password',
@@ -35,17 +31,15 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
+     * casts: Convierte automáticamente algunos campos de la base de datos a tipos concretos de PHP.
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_admin' => 'boolean', // Aseguramos que siempre devuelva un valor booleano
+        'is_admin' => 'boolean', // Aseguramos que siempre sea verdadero o falso, nunca "0" o "1"
     ];
 
     /**
-     * Comprueba si el usuario es administrador.
+     * Función que nos dice rápidamente si el usuario es administrador o un cliente normal.
      *
      * @return bool
      */
@@ -54,11 +48,17 @@ class User extends Authenticatable
         return $this->is_admin;
     }
 
+    /**
+     * RELACIÓN: Un usuario puede tener muchos pedidos.
+     */
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * RELACIÓN: Un usuario tiene muchos productos guardados en su lista de deseos.
+     */
     public function wishlist()
     {
         return $this->hasMany(Wishlist::class);
